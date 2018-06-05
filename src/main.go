@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+
 	r := mux.NewRouter()
 	r.HandleFunc("/", handler)
 	fs := http.FileServer(http.Dir("static/"))
