@@ -14,11 +14,19 @@ type Variables struct {
 }
 
 func main() {
+	log.Printf("Starting EspiSite...")
+	log.Printf("Assembling files...")
+
+	assemble() //gather files
+
+	log.Printf("Initializing routers...")
 
 	r := mux.NewRouter()
 	r.HandleFunc("/", homeHandler)
 	fs := http.FileServer(http.Dir("static/"))
 	r.Handle("/site", http.StripPrefix("/site", fs))
+
+	log.Printf("Webserver starting on port 8080.")
 
 	http.ListenAndServe(":8080", r)
 }

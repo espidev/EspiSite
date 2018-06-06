@@ -2,5 +2,5 @@
 
 cd src
 go build .
-mv ./src ../server
+mv ./src ../test/server
 
