@@ -22,7 +22,8 @@ func main() {
 	log.Printf("Initializing routers...")
 
 	r := mux.NewRouter()
-	r.HandleFunc("/", homeHandler)
+	r.HandleFunc("/", indexHandler)
+	r.HandleFunc("/home", homeHandler)
 	fs := http.FileServer(http.Dir("static/"))
 	r.Handle("/site", http.StripPrefix("/site", fs))
 
@@ -33,6 +34,18 @@ func main() {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello World!")
+}
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	vars := Variables{}
+	t, err := template.ParseFiles("./html/index.html")
+	if err != nil {
+		log.Print("template parsing error: ", err)
+	}
+	err = t.Execute(w, vars)
+	if err != nil {
+		log.Print("template parsing error: ", err)
+	}
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
