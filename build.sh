@@ -1,6 +1,6 @@
-#/bin/bash
+#!/bin/bash
 
-cd src
-go build .
-mv ./src ../test/server
+cd src/main
+go build ./...
+mv ./EspiSite ../../
 
