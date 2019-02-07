@@ -10,6 +10,7 @@ import (
 type Config struct {
 	SiteName string
 	Port int
+	AdminRoute string
 }
 
 const (
@@ -17,6 +18,7 @@ const (
 	DefaultConfig  = `
 	SiteName = "espidev"
 	Port = 3000
+	AdminRoute = "/admin"
 `)
 
 func setupConfig() {

@@ -14,6 +14,7 @@ import (
 var (
 	router *gin.Engine
 	config Config
+	db IDatabase
 )
 
 const (
@@ -37,6 +38,7 @@ func main() {
 			log.Fatalf("listen: %s\n", err)
 		}
 	}()
+
 	quit := make (chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
 	<- quit
