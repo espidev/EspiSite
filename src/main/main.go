@@ -14,7 +14,7 @@ import (
 var (
 	router *gin.Engine
 	config Config
-	db IDatabase
+	db     IDatabase
 )
 
 const (
@@ -23,31 +23,36 @@ const (
 
 func main() {
 	log.Printf("Starting EspiSite...\n")
-	setupConfig()
 
+	// Load config and data
+	setupConfig()
+	LoadDB()
+
+	// Init web-server
 	router = gin.Default()
 	setupRoutes()
 
-	srv := &http.Server {
-		Addr: ":" + strconv.Itoa(config.Port),
+	srv := &http.Server{
+		Addr:    ":" + strconv.Itoa(config.Port),
 		Handler: router,
 	}
 
-	go func() {
+	go func() { // start web-server in goroutine
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("listen: %s\n", err)
 		}
 	}()
 
-	quit := make (chan os.Signal)
+	// listen for sigint to shutdown gracefully
+	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
-	<- quit
+	<-quit
 	log.Println("Shutting down EspiSite...")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
-		log.Fatal("Server Shutdown: ", err)
+		log.Fatal("Server shutdown: ", err)
 	}
 	log.Println("EspiSite has stopped.")
 }
@@ -59,5 +64,8 @@ func setupRoutes() {
 	})
 	router.GET("/test", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "home.html", gin.H{})
+	})
+	router.GET(config.AdminRoute, func(c *gin.Context) {
+
 	})
 }

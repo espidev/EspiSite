@@ -12,36 +12,43 @@ const (
 )
 
 type IDatabase struct {
-	Posts []IPost
-	Users []IUser
+	Posts []IPost `json:"posts"`
+	Users []IUser `json:"users"`
 }
 
 type IPost struct {
-	Name string
-	UUID string
-	UserID string
-	Categories []string
+	Name string `json:"name"`
+	UUID string `json:"uuid"`
+	UserID string `json:"userid"`
+	Categories []string `json:"categories"`
 
-	TimeCreated int64
-	TimeUpdated int64
+	TimeCreated int64 `json:"timecreated"`
+	TimeUpdated int64 `json:"timeupdated"`
 
-	Icon string
-	Content string
+	Icon string `json:"icon"`
+	Content string `json:"content"`
 }
 
 type IUser struct {
-	Name string
-	UUID string
+	Name string `json:"name"`
+	UUID string `json:"uuid"`
 
-	TimeRegistered int64
-	Posts []string
+	TimeRegistered int64 `json:"timeregistered"`
+	Posts []string `json:"posts"`
 
-	Icon string
-	Description string
+	Icon string `json:"icon"`
+	Description string `json:"description"`
 }
 
 func LoadDB() {
-
+	bV, err := ioutil.ReadFile(DBLocation)
+	if err != nil {
+		log.Fatalf("Cannot load database: %s\n", err)
+	}
+	err = json.Unmarshal(bV, &db)
+	if err != nil {
+		log.Fatalf("Error unmarshalling db from json: %s\n", err)
+	}
 }
 
 func StoreDB() {
