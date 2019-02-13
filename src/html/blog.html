@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>blog</title>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        body {
+            padding: 80px;
+            display: block;
+            float: left;
+            font-family: 'Nunito', sans-serif;
+            animation-name: fadeIn;
+            animation-duration: 2s;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .postName {
+            float: left;
+            font-size: 18px;
+            padding-left: 18px;
+            font-family: 'Nunito SemiBold', sans-serif;
+        }
+
+        .postUpdated {
+            float: right;
+            font-size: 18px;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .postItem {
+            width: 500px;
+            padding: 18px;
+            border-width: 2px;
+            border-color: #e91e63;
+            border-left-style: solid;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            box-shadow: 0 1px 10px 0 #e91e63;
+        }
+        img {
+            border-radius: 10px;
+            width: 20px;
+            height: auto;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<h1>blog <i class="material-icons">book</i></h1>
+<ul>
+    <li class="postItem">
+        <img class="postIcon" src="assets/estinet.jpeg" alt="icon">
+        <div class="postName">
+            This is a post
+        </div>
+        <div class="postUpdated">
+            02/13/2019
+        </div>
+        <br/>
+    </li>
+    <li><br/></li>
+    <li class="postItem">
+        <img class="postIcon" src="assets/estinet.jpeg" alt="icon">
+        <div class="postName">
+            This is another post
+        </div>
+        <div class="postUpdated">
+            01/12/2019
+        </div>
+        <br/>
+    </li>
+    <li><br/></li>
+    <li class="postItem">
+        <img class="postIcon" src="assets/estinet.jpeg" alt="icon">
+        <div class="postName">
+            I like oranges
+        </div>
+        <div class="postUpdated">
+            11/05/2017
+        </div>
+        <br/>
+    </li>
+    <li><br/></li>
+    <li class="postItem">
+        <img class="postIcon" src="assets/estinet.jpeg" alt="icon">
+        <div class="postName">
+            oranges are bad
+        </div>
+        <div class="postUpdated">
+            11/05/2012
+        </div>
+        <br/>
+    </li>
+</ul>
+</body>
+</html>
