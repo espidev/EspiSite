@@ -20,6 +20,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"log"
 	"os"
@@ -30,20 +31,29 @@ const (
 )
 
 type IDatabase struct {
-	Posts []IPost `json:"posts"`
-	Users []IUser `json:"users"`
+	Posts []*IPost `json:"posts"`
+	Users []*IUser `json:"users"`
+}
+
+type PostID struct {
+	IDYear  string  `json:"id_year"`
+	IDMonth string  `json:"id_month"`
+	IDDay   string  `json:"id_day"`
+	IDNum   string  `json:"id_num"`
+	IDDesc  string `json:"id_desc"`
 }
 
 type IPost struct {
-	Name string `json:"name"`
-	UUID string `json:"uuid"`
-	UserID string `json:"userid"`
+	Name       string   `json:"name"`
+	UserID     string   `json:"userid"`
 	Categories []string `json:"categories"`
+
+	ID PostID `json:"id"`
 
 	TimeCreated int64 `json:"timecreated"`
 	TimeUpdated int64 `json:"timeupdated"`
 
-	Icon string `json:"icon"`
+	Icon    string `json:"icon"`
 	Content string `json:"content"`
 }
 
@@ -51,11 +61,20 @@ type IUser struct {
 	Name string `json:"name"`
 	UUID string `json:"uuid"`
 
-	TimeRegistered int64 `json:"timeregistered"`
-	Posts []string `json:"posts"`
+	TimeRegistered int64    `json:"timeregistered"`
+	Posts          []string `json:"posts"`
 
-	Icon string `json:"icon"`
+	Icon        string `json:"icon"`
 	Description string `json:"description"`
+}
+
+func GetPost(id PostID) (*IPost, error) {
+	for _, post := range db.Posts {
+		if post.ID == id {
+			return post, nil
+		}
+	}
+	return nil, errors.New("not found")
 }
 
 func LoadDB() {
@@ -70,7 +89,7 @@ func LoadDB() {
 }
 
 func StoreDB() {
-	err := os.Rename(DBLocation, DBLocation + ".backup")
+	err := os.Rename(DBLocation, DBLocation+".backup")
 	if err != nil {
 		log.Fatalf("Cannot create backup: %s\n", err)
 	}

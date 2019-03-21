@@ -90,4 +90,7 @@ func setupRoutes() {
 	router.GET(config.AdminRoute, func(c *gin.Context) {
 
 	})
+	router.GET("/posts/:year/:month/:day/:num/:desc", func(c *gin.Context) {
+		id := PostID{IDDay: c.Params.ByName("day")}
+	})
 }
