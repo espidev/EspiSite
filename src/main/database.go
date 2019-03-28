@@ -68,9 +68,13 @@ type IUser struct {
 	Description string `json:"description"`
 }
 
+func (ip *IPost) isID(id PostID) bool {
+	return ip.ID.IDDay == id.IDDay && ip.ID.IDMonth == id.IDMonth && ip.ID.IDYear == id.IDYear && ip.ID.IDNum == id.IDNum
+}
+
 func GetPost(id PostID) (*IPost, error) {
 	for _, post := range db.Posts {
-		if post.ID == id {
+		if post.isID(id) {
 			return post, nil
 		}
 	}

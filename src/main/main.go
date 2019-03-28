@@ -91,6 +91,14 @@ func setupRoutes() {
 
 	})
 	router.GET("/posts/:year/:month/:day/:num/:desc", func(c *gin.Context) {
-		id := PostID{IDDay: c.Params.ByName("day")}
+		id := PostID{IDYear: c.Params.ByName("year"),
+			IDDay: c.Params.ByName("day"),
+		IDMonth: c.Params.ByName("month"),
+		IDNum: c.Params.ByName("num")}
+
+		post, err := GetPost(id)
+		if err != nil {
+			
+		}
 	})
 }
