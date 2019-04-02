@@ -98,7 +98,14 @@ func setupRoutes() {
 
 		post, err := GetPost(id)
 		if err != nil {
-			
+			c.HTML(http.StatusNotFound, "404.html", gin.H{})
+			return
 		}
+		c.HTML(http.StatusOK, "post.tmpl", gin.H {
+			"postName": post.Name,
+			"timeUpdated": post.TimeUpdated,
+			"content": post.Content,
+		})
+
 	})
 }

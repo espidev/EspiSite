@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ .postName }}</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .content {
+            padding: 10% 10% 5%;
+            display: block;
+            float: left;
+            font-family: 'Lato', sans-serif;
+            animation-name: fadeIn;
+            animation-duration: 2s;
+            line-height: 2;
+        }
+
+        p {
+            font-size: 24px;
+        }
+
+        h1 {
+            font-size: 40px;
+            letter-spacing: -0.5px;
+            font-family: 'Nunito SemiBold', sans-serif;
+        }
+
+        h2 {
+            font-size: 27px;
+            letter-spacing: 0.01em;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        img {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .date {
+            float: right;
+            color: #999999;
+        }
+
+        h4 {
+            font-size: 20px;
+            letter-spacing: 0.01em
+        }
+
+        footer {
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-bottom: 100px;
+            color: #999999;
+            font-size: 20px;
+            letter-spacing: 0.01em;
+            font-family: 'Nunito', sans-serif;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <h1>{{ .postName }} <div class="date"><h4>last updated: {{ .timeUpdated }}}</h4></div></h1>
+    {{ .content }}
+</div>
+<footer>
+    espi.dev - licensed under gpl v3, and is free to use and redistribute
+    <div style="float: right"> ✧ﾟ･: *ヽ(◕ヮ◕ヽ)</div>
+</footer>
+</body>
+</html>
