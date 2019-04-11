@@ -90,6 +90,7 @@ func setupRoutes() {
 	router.GET(config.AdminRoute, func(c *gin.Context) {
 
 	})
+
 	router.GET("/posts/:year/:month/:day/:num/:desc", func(c *gin.Context) {
 		id := PostID{IDYear: c.Params.ByName("year"),
 			IDDay: c.Params.ByName("day"),
@@ -101,7 +102,8 @@ func setupRoutes() {
 			c.HTML(http.StatusNotFound, "404.html", gin.H{})
 			return
 		}
-		c.HTML(http.StatusOK, "post.tmpl", gin.H {
+
+		c.HTML(http.StatusOK, "post.html", gin.H {
 			"postName": post.Name,
 			"timeUpdated": post.TimeUpdated,
 			"content": post.Content,
