@@ -2,9 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>New Post</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        h2 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 45px;
+            padding: 20px;
+        }
+
+        #title {
+            font-size: 40px;
+            letter-spacing: -0.5px;
+            font-family: 'Nunito SemiBold', sans-serif;
+            border: none;
+        }
+
+        #title:focus {
+            border: 1px solid #999999;
+        }
+    </style>
 </head>
 <body>
-
+<h2>
+    <label for="title"></label><textarea id="title" name="title" rows="1">post title</textarea>
+</h2>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    //$('#title').autogrow();
+</script>
 </body>
 </html>
