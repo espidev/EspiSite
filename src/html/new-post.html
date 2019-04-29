@@ -4,12 +4,47 @@
     <meta charset="UTF-8">
     <title>New Post</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 40px;
+            letter-spacing: -0.5px;
+            font-family: 'Nunito SemiBold', sans-serif;
+        }
+
         h2 {
+            font-size: 27px;
+            letter-spacing: 0.01em;
             font-family: 'Nunito', sans-serif;
-            font-size: 45px;
-            padding: 20px;
+        }
+
+        p {
+            font-size: 24px;
+        }
+
+        body {
+            padding: 10% 10% 5%;
+            display: block;
+            float: left;
+        }
+
+        #content {
+            display: block;
+            float: left;
+            font-family: 'Lato', sans-serif;
+            animation-name: fadeIn;
+            animation-duration: 2s;
+            line-height: 2;
         }
 
         #title {
@@ -19,18 +54,81 @@
             border: none;
         }
 
+        p {
+            font-size: 24px;
+        }
+
         #title:focus {
             border: 1px solid #999999;
+        }
+
+        #textEditor {
+            width: 1000px;
+            height: 400px;
+            font-family: 'Fira Mono', monospace;
+            font-size: 24px;
+            animation-name: fadeIn;
+            animation-duration: 0.5s;
+            line-height: 2;
+        }
+
+        #renderText {
+            animation-name: fadeIn;
+            animation-duration: 0.5s;
+            line-height: 2;
+        }
+
+        footer {
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-bottom: 100px;
+            color: #999999;
+            font-size: 20px;
+            letter-spacing: 0.01em;
+            font-family: 'Nunito', sans-serif;
         }
     </style>
 </head>
 <body>
-<h2>
+<h1>
     <label for="title"></label><textarea id="title" name="title" rows="1">post title</textarea>
-</h2>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</h1>
+
+<div id="content">
+    <div id="renderText" onclick="switchMode(true)">
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in luctus dui. Donec quis tempor odio, sed congue
+        odio. Nunc semper suscipit turpis, at placerat ex ornare ac. Donec eget ullamcorper arcu. Aenean metus mauris,
+        faucibus sed suscipit vitae, rhoncus ac arcu. Quisque finibus condimentum magna. Nullam commodo maximus est sed
+        egestas. In aliquam nisl at lacus finibus, vel pharetra arcu egestas. Suspendisse porttitor, ante ut viverra
+        fringilla, neque sem tincidunt quam, eget consectetur risus nunc ut elit. Mauris posuere diam in ex vehicula
+        malesuada. Praesent pretium condimentum elit eget faucibus. Morbi gravida tortor eu erat placerat, eu laoreet
+        odio eleifend. Ut viverra risus id felis ultrices sollicitudin.
+    </p>
+    </div>
+</div>
+
 <script>
-    //$('#title').autogrow();
+    let isEditing = false;
+
+    function switchMode(isClick) {
+        if (isEditing && !isClick) {
+            let content = document.getElementById("textEditor").value;
+            document.getElementById("content").innerHTML = `
+            <div id="renderText" onclick="switchMode(true)">
+            ` + content + `
+            </div>
+            `;
+        } else {
+            let content = document.getElementById("renderText").innerHTML;
+            document.getElementById("content").innerHTML = `
+            <textarea id="textEditor" onblur="switchMode(false)">` + content + `</textarea>
+            `;
+            document.getElementById("textEditor").focus();
+        }
+        isEditing = !isEditing;
+    }
 </script>
+
 </body>
 </html>
