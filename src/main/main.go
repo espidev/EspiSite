@@ -88,7 +88,7 @@ func setupRoutes() {
 		c.HTML(http.StatusOK, "home.html", gin.H{})
 	})
 	router.GET(config.AdminRoute, func(c *gin.Context) {
-
+		c.HTML(http.StatusOK, "admin.html", gin.H{})
 	})
 
 	router.GET(config.AdminRoute + "/new-post", func (c *gin.Context) {
@@ -102,6 +102,7 @@ func setupRoutes() {
 		content := c.PostForm("content")
 		title := c.PostForm("title")
 		log.Println(content + " " + title)
+		
 	})
 
 	router.GET("/posts/:year/:month/:day/:num/:desc", func(c *gin.Context) {
