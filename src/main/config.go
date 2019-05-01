@@ -36,7 +36,7 @@ const (
 	DefaultConfig  = `
 	SiteName = "espidev"
 	Port = 3000
-	AdminRoute = "/admin"
+	AdminRoute = "/admin/"
 `)
 
 func setupConfig() {

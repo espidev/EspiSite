@@ -80,7 +80,7 @@ func main() {
 }
 
 func setupRoutes() {
-	router.LoadHTMLFiles(RootRepoFolder + "/src/html/*")
+	router.LoadHTMLGlob(RootRepoFolder + "/src/html/*")
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
@@ -89,6 +89,19 @@ func setupRoutes() {
 	})
 	router.GET(config.AdminRoute, func(c *gin.Context) {
 
+	})
+
+	router.GET(config.AdminRoute + "/new-post", func (c *gin.Context) {
+		c.HTML(http.StatusOK, "new-post.html", gin.H {
+			"title": "post title",
+			"content": "<p>this is some good quality content right here!</p>",
+		})
+	})
+
+	router.POST(config.AdminRoute + "/new-post", func(c *gin.Context) {
+		content := c.PostForm("content")
+		title := c.PostForm("title")
+		log.Println(content + " " + title)
 	})
 
 	router.GET("/posts/:year/:month/:day/:num/:desc", func(c *gin.Context) {

@@ -1,3 +1,4 @@
 
 	SiteName = "espidev"
 	Port = 3000
+	AdminRoute = "/admin/"

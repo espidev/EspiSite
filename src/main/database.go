@@ -1,22 +1,22 @@
 package main
 
 /*
-    EspiSite - a quick and dirty CMS
-    Copyright (C) 2019 EspiDev
+   EspiSite - a quick and dirty CMS
+   Copyright (C) 2019 EspiDev
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
 
 import (
 	"encoding/json"
@@ -36,10 +36,10 @@ type IDatabase struct {
 }
 
 type PostID struct {
-	IDYear  string  `json:"id_year"`
-	IDMonth string  `json:"id_month"`
-	IDDay   string  `json:"id_day"`
-	IDNum   string  `json:"id_num"`
+	IDYear  string `json:"id_year"`
+	IDMonth string `json:"id_month"`
+	IDDay   string `json:"id_day"`
+	IDNum   string `json:"id_num"`
 	IDDesc  string `json:"id_desc"`
 }
 
@@ -82,6 +82,11 @@ func GetPost(id PostID) (*IPost, error) {
 }
 
 func LoadDB() {
+
+	if _, err := os.Stat(DBLocation); os.IsNotExist(err) {
+		StoreDB()
+	}
+
 	bV, err := ioutil.ReadFile(DBLocation)
 	if err != nil {
 		log.Fatalf("Cannot load database: %s\n", err)
@@ -93,9 +98,11 @@ func LoadDB() {
 }
 
 func StoreDB() {
-	err := os.Rename(DBLocation, DBLocation+".backup")
-	if err != nil {
-		log.Fatalf("Cannot create backup: %s\n", err)
+	if _, err := os.Stat(DBLocation); !os.IsNotExist(err) {
+		err := os.Rename(DBLocation, DBLocation+".backup")
+		if err != nil {
+			log.Fatalf("Cannot create backup: %s\n", err)
+		}
 	}
 	b, err := json.Marshal(db)
 	if err != nil {
