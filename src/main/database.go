@@ -24,6 +24,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strconv"
 )
 
 const (
@@ -40,7 +41,6 @@ type PostID struct {
 	IDMonth string `json:"id_month"`
 	IDDay   string `json:"id_day"`
 	IDNum   string `json:"id_num"`
-	IDDesc  string `json:"id_desc"`
 }
 
 type IPost struct {
@@ -94,6 +94,16 @@ func LoadDB() {
 	err = json.Unmarshal(bV, &db)
 	if err != nil {
 		log.Fatalf("Error unmarshalling db from json: %s\n", err)
+	}
+
+	for _, post := range db.Posts {
+		n, err := strconv.ParseInt(post.ID.IDNum, 10, 64)
+		if err != nil {
+			continue
+		}
+		if postNum <= n {
+			postNum = n+1
+		}
 	}
 }
 

@@ -90,23 +90,57 @@
 <body>
 <h1>blog <i class="material-icons">book</i></h1>
 <ul>
-
-    {{ range . }}
-        <li>
-            <a class="postItem" href="posts/{{.ID.IDYear }}/{{ .ID.IDMonth }}/{{ .ID.IDDay }}/{{ .ID.IDNum }}">
-                <img class="postIcon" src="{{.Icon}}" alt="icon">
-                <div class="postName">
-                    {{ .Name }}
-                </div>
-                <div class="postUpdated">
-                    {{ .TimeUpdated }}
-                </div>
-                <br/>
-            </a>
-        </li>
-        <li><br/></li>
-    {{end}}
-
+    <li>
+        <a class="postItem" href="#">
+        <img class="postIcon" src="assets/estinet.jpeg" alt="icon">
+        <div class="postName">
+            This is a post
+        </div>
+        <div class="postUpdated">
+            02/13/2019
+        </div>
+        <br/>
+        </a>
+    </li>
+    <li><br/></li>
+    <li>
+        <a class="postItem" href="#">
+        <img class="postIcon" src="assets/estinet.jpeg" alt="icon">
+        <div class="postName">
+            This is another post
+        </div>
+        <div class="postUpdated">
+            01/12/2019
+        </div>
+        <br/>
+        </a>
+    </li>
+    <li><br/></li>
+    <li>
+        <a class="postItem" href="#">
+        <img class="postIcon" src="assets/estinet.jpeg" alt="icon">
+        <div class="postName">
+            I like oranges
+        </div>
+        <div class="postUpdated">
+            11/05/2017
+        </div>
+        <br/>
+        </a>
+    </li>
+    <li><br/></li>
+    <li>
+        <a class="postItem" href="#">
+        <img class="postIcon" src="assets/estinet.jpeg" alt="icon">
+        <div class="postName">
+            oranges are bad
+        </div>
+        <div class="postUpdated">
+            11/05/2012
+        </div>
+        <br/>
+        </a>
+    </li>
 </ul>
 </body>
 </html>

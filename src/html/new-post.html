@@ -16,10 +16,22 @@
             }
         }
 
+        @keyframes expand {
+            from {
+                box-shadow: 0 1px 10px 0 #e91e63;
+            }
+            50% {
+                box-shadow: 0 1px 29px 0 #e91e63;
+            }
+            100% {
+                box-shadow: 0 1px 10px 0 #e91e63;
+            }
+        }
+
         h1 {
             font-size: 40px;
-            letter-spacing: -0.5px;
-            font-family: 'Nunito SemiBold', sans-serif;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
         }
 
         h2 {
@@ -30,12 +42,6 @@
 
         p {
             font-size: 24px;
-        }
-
-        body {
-            padding: 10% 10% 5%;
-            display: block;
-            float: left;
         }
 
         #content {
@@ -49,11 +55,18 @@
 
         #title {
             font-size: 40px;
-            letter-spacing: -0.5px;
             width: 100%;
-            font-family: 'Nunito SemiBold', sans-serif;
+            font-weight: 800;
+            font-family: 'Nunito', sans-serif;
             border: none;
             resize: vertical;
+        }
+
+        #everything {
+            padding: 10% 10% 5%;
+            display: block;
+            float: left;
+            width: 80%;
         }
 
         p {
@@ -95,25 +108,37 @@
             font-family: 'Nunito', sans-serif;
         }
 
+        #savePost:hover {
+            animation: 1s expand infinite;
+        }
+
         #savePost {
             padding: 10px 10px 10px 10px;
             border-radius: 50px;
             font-family: 'Nunito', sans-serif;
-            font-size: 24px;
+            font-size: 20px;
             border-style: solid;
             border-color: #e91e63;
             border-width: 1px;
-            animation-name: fadeIn;
-            animation-duration: 1.5s;
+            /*animation: 1s fadeIn;*/
             color: #e91e63;
-            width: 270px;
+            width: 200px;
             background-color: #FFFFFF;
             float: right;
+        }
+
+        #savePostText {
+            text-decoration: none;
+            color: #e91e63;
         }
 
     </style>
 </head>
 <body>
+
+<!-- Render -->
+
+<div id="everything">
 <h1>
     <label for="title"></label><textarea id="title" name="title" rows="1">{{ .title }}</textarea>
 </h1>
@@ -122,14 +147,18 @@
     <div id="renderText" onclick="switchMode(true)">{{ .content }}</div>
 </div>
 <br/>
-<button id="savePost"><a>Save</a></button>
+    <br/>
+    <button id="savePost" onmouseenter="this.style.animation = '1s expand infinite'" onmouseleave="this.style.animation = 'none'" onclick="submit()">
+        <a id="savePostText" onclick="submit()" href="#">Save</a>
+    </button>
+</div>
 
-<script
-        src="https://code.jquery.com/jquery-3.4.0.slim.min.js"
-        integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI="
-        crossorigin="anonymous"></script>
+<!-- JS -->
+
 <script>
     let isEditing = false;
+
+    document.getElementById("savePost").style.animation = '1s fadeIn';
 
     function switchMode(isClick) {
         if (isEditing && !isClick) {
@@ -166,8 +195,7 @@
         form.submit();
     }
 
-    $("#savePost").click(() => {
-
+    function submit() {
         let content = "";
         if (isEditing) {
             content = document.getElementById("textEditor").value;
@@ -179,7 +207,7 @@
             title: document.getElementById("title").value,
             content: content,
         });
-    });
+    }
 
 </script>
 
