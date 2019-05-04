@@ -29,14 +29,18 @@ type Config struct {
 	SiteName string
 	Port int
 	AdminRoute string
+	Secret string
+	Domain string
 }
 
 const (
 	ConfigLocation = "./config.toml"
 	DefaultConfig  = `
-	SiteName = "espidev"
-	Port = 3000
-	AdminRoute = "/admin/"
+SiteName = "espidev"
+Port = 3000
+AdminRoute = "/admin/"
+Secret = "hithisisnice"
+Domain = "localhost"
 `)
 
 func setupConfig() {

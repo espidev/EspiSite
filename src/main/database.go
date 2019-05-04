@@ -58,8 +58,9 @@ type IPost struct {
 }
 
 type IUser struct {
-	Name string `json:"name"`
-	UUID string `json:"uuid"`
+	DisplayName string `json:"displayname"`
+	UserName string `json:"username"`
+	Password string `json:"password"`
 
 	TimeRegistered int64    `json:"timeregistered"`
 	Posts          []string `json:"posts"`

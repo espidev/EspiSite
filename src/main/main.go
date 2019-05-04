@@ -21,7 +21,6 @@ package main
 import (
 	"context"
 	"github.com/gin-gonic/gin"
-	"html/template"
 	"log"
 	"net/http"
 	"os"
@@ -61,7 +60,8 @@ This is free software, and you are welcome to redistribute it under certain cond
 		Handler: router,
 	}
 
-	go func() { // start web-server in goroutine
+	// start web-server in goroutine
+	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("listen: %s\n", err)
 		}
@@ -82,82 +82,19 @@ This is free software, and you are welcome to redistribute it under certain cond
 }
 
 func setupRoutes() {
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
+
 	router.LoadHTMLGlob(RootRepoFolder + "/src/html/*")
 
-	router.GET("/login", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "login.html", gin.H {})
-	})
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
 	router.GET("/test", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "home.html", gin.H{})
 	})
-	router.GET(config.AdminRoute, func(c *gin.Context) {
-		c.HTML(http.StatusOK, "admin.html", gin.H{})
-	})
 
-	router.GET(config.AdminRoute+"/new-post", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "new-post.html", gin.H{
-			"title":   "post title",
-			"content": template.HTML("<p>this is some good quality content right here!</p>"),
-		})
-	})
-
-	router.POST(config.AdminRoute+"/new-post", func(c *gin.Context) {
-
-		t := time.Now()
-
-		id := PostID{
-			IDYear:  strconv.Itoa(t.Year()),
-			IDMonth: t.Month().String(),
-			IDDay:   strconv.Itoa(t.Day()),
-			IDNum:   strconv.FormatInt(postNum, 10),
-		}
-
-		postNum++
-
-		post := IPost{
-			Name:        c.PostForm("title"),
-			UserID:      "",
-			Categories:  []string{},
-			ID:          id,
-			TimeCreated: t.Unix(),
-			TimeUpdated: t.Unix(),
-			Icon:        "",
-			Content:     c.PostForm("content"),
-		}
-
-		db.Posts = append(db.Posts, &post)
-
-		c.Redirect(301, "/posts/"+id.IDYear+"/"+id.IDMonth+"/"+id.IDDay+"/"+id.IDNum)
-
-		go func() {
-			StoreDB()
-		}()
-	})
-
-	router.GET("/posts", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "blog.html", db.Posts)
-	})
-
-	router.GET("/posts/:year/:month/:day/:num", func(c *gin.Context) {
-		id := PostID{IDYear: c.Params.ByName("year"),
-			IDDay:   c.Params.ByName("day"),
-			IDMonth: c.Params.ByName("month"),
-			IDNum:   c.Params.ByName("num")}
-
-		post, err := GetPost(id)
-		if err != nil {
-			c.HTML(http.StatusNotFound, "404.html", gin.H{})
-			return
-		}
-
-		c.HTML(http.StatusOK, "post.html", gin.H{
-			"postName":    post.Name,
-			"timeUpdated": time.Unix(post.TimeUpdated, 0),
-			"content":     template.HTML(post.Content),
-		})
-
-	})
+	PostRoutes()
+	AuthRoutes()
+	AdminRoutes()
 }
