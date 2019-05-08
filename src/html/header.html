@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <style>
+
         @keyframes header-fadein {
             from {
                 opacity: 0;
@@ -51,12 +52,10 @@
             margin-left: 150px;
             position: fixed;
             display: block;
-            transform: scale(0.90);
-            animation: 1s header-fadein forwards;
         }
 
         .header-visible {
-
+            animation: 1s header-fadein forwards;
         }
 
         .header-hidden {
@@ -82,7 +81,8 @@
         }
 
         .header-hide-button-on {
-            border-radius: 80%;
+            border-radius: 50%;
+            padding-right: 30px;
             background-color: #e0e0e0;
         }
     </style>
@@ -90,7 +90,7 @@
 </head>
 <body>
 <header onmouseenter="headerMouseEnter()" onmouseleave="headerMouseLeave()">
-    <div id="site-header">
+    <div id="site-header" class="header-visible">
         <a href="/" id="header-logo"><b>espidev <i class="material-icons">arrow_downward</i></b> </a>
         <a href="/about" class="header-links">about</a>
         <a href="/posts" class="header-links">blog</a>
@@ -99,14 +99,15 @@
                     class="material-icons">keyboard_arrow_up</i></a>
     </div>
 </header>
+
 <script>
     let hideHeader = true;
 
     function headerToggleHide() {
         if (hideHeader) {
-            document.getElementById("toggle-header-button").classList.add("header-hide-button-on")
-        } else {
             document.getElementById("toggle-header-button").classList.remove("header-hide-button-on")
+        } else {
+            document.getElementById("toggle-header-button").classList.add("header-hide-button-on")
         }
         hideHeader = !hideHeader;
     }
@@ -115,34 +116,12 @@
         if (hideHeader) {
             document.getElementById("site-header").classList.remove("header-hidden");
             document.getElementById("site-header").classList.add('header-visible');
-
-            let opacity = parseFloat(document.getElementById("site-header").style.opacity);
-            let scale = parseFloat(document.getElementById("site-header").style.transform);
-            let id = setInterval(animateOpen, 5);
-
-            function animateOpen() {
-
-                console.log("d" + document.getElementById("site-header").style.opacity + " " + document.getElementById("site-header").style.transform);
-                console.log(opacity + " " + scale);
-
-                if (scale == 1 && opacity == 1) {
-                    clearInterval(id);
-                    return;
-                }
-                if (opacity != 1) {
-                    document.getElementById("site-header").style.opacity = "" + opacity;
-                    opacity += 0.01;
-                }
-                if (scale != 1) {
-                    document.getElementById("site-header").style.transform = "" + scale;
-                    scale += 0.01;
-                }
-            }
         }
     }
 
     function headerMouseLeave() {
         if (hideHeader) {
+            document.getElementById("site-header").classList.remove("header-hide-button-on");
             document.getElementById("site-header").classList.remove("header-visible");
             document.getElementById("site-header").classList.add('header-hidden');
         }
