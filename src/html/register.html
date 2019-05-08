@@ -104,9 +104,12 @@
 <div style="width: 100%;">
 
     <!--{{ if .createSuccess }}-->
-    <div class="success">
-        successfully created account!
+    <div id="success">
+        Successfully created account! Redirecting to login page...
     </div>
+    <script>
+        setTimeout(function() {window.location.replace("{{ .loginLink }}")}, 2000);
+    </script>
     <!--{{ end }}-->
 
     <div class="box">

@@ -31,6 +31,7 @@ type Config struct {
 	AdminRoute string
 	Secret string
 	Domain string
+	Debug bool
 }
 
 const (
@@ -41,6 +42,7 @@ Port = 3000
 AdminRoute = "/admin/"
 Secret = "hithisisnice"
 Domain = "localhost"
+Debug = true
 `)
 
 func setupConfig() {

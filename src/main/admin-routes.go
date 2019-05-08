@@ -49,7 +49,7 @@ func AdminRoutes() {
 
 		db.Posts = append(db.Posts, &post)
 
-		c.Redirect(301, "/posts/"+id.IDYear+"/"+id.IDMonth+"/"+id.IDDay+"/"+id.IDNum)
+		c.Redirect(302, "/posts/"+id.IDYear+"/"+id.IDMonth+"/"+id.IDDay+"/"+id.IDNum)
 
 		go StoreDB()
 	})

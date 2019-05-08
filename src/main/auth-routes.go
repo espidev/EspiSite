@@ -8,7 +8,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"log"
 	"net/http"
-	"strconv"
 	"strings"
 	"time"
 )
@@ -41,30 +40,34 @@ func GetJWTClaims(token string, secret string) (jwt.MapClaims, error) {
 
 func AuthRequired() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		log.Println(config.Debug)
 		sess, err := c.Cookie("GOSESSID")
 		if err != nil {
-			c.Redirect(301, "/login")
+			if config.Debug {
+				log.Println("[Token] " + err.Error())
+			}
+			c.Redirect(302, "/login")
 			c.Abort()
 			return
 		}
 
 		claims, err := GetJWTClaims(sess, config.Secret)
 		if err != nil {
-			c.Redirect(301, "/login")
+			if config.Debug {
+				log.Println("[Token]" + err.Error())
+			}
+			c.Redirect(302, "/login")
 			c.Abort()
 			return
 		}
 
-		exp, err := strconv.ParseInt(claims["expires"].(string), 10, 64)
-		if err != nil {
-			log.Println(err.Error())
-			c.HTML(http.StatusInternalServerError, "500.html", gin.H{})
-			c.Abort()
-			return // invalid token
-		}
+		exp := claims["expires"].(float64)
 
-		if exp > time.Now().Unix() {
-			c.Redirect(301, "/login")
+		if exp < float64(time.Now().Unix()) {
+			if config.Debug {
+				log.Println("[Token] Expired token.")
+			}
+			c.Redirect(302, "/login")
 			c.Abort()
 			return
 		}
@@ -78,7 +81,10 @@ func AuthRequired() gin.HandlerFunc {
 		}
 
 		if user == nil {
-			c.Redirect(301, "/login")
+			if config.Debug {
+				log.Println("[Token] User not found.")
+			}
+			c.Redirect(302, "/login")
 			c.Abort()
 			return
 		}
@@ -89,6 +95,11 @@ func AuthRequired() gin.HandlerFunc {
 }
 
 func AuthRoutes() {
+	router.GET("/logout", func(c *gin.Context) {
+		c.SetCookie("GOSESSID", "", 0, "/", config.Domain, false, false)
+		c.Redirect(302, "login")
+	})
+
 	router.GET("/login", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "login.html", gin.H{
 			"incorrectPassword": false,
@@ -138,10 +149,10 @@ func AuthRoutes() {
 			return
 		}
 
-		c.SetCookie("GOSESSID", tokenString, 86400, "/", config.Domain, true, false)
+		c.SetCookie("GOSESSID", tokenString, 86400, "/", config.Domain, false, false)
 
 		// successful
-		c.HTML(http.StatusOK, "index.html", gin.H{})
+		c.Redirect(302, "/")
 	})
 
 	router.GET("/register", func(c *gin.Context) {
@@ -173,8 +184,9 @@ func AuthRoutes() {
 
 		go StoreDB()
 
-		c.HTML(http.StatusOK, "login.html", gin.H{
+		c.HTML(http.StatusOK, "register.html", gin.H{
 			"createSuccess": true,
+			"loginLink": config.Domain+"/login",
 		})
 	})
 }

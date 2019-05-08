@@ -15,6 +15,7 @@
                 opacity: 1;
             }
         }
+
         body {
             font-family: 'Nunito', sans-serif;
             font-size: 16px;
@@ -22,15 +23,18 @@
             color: #FFFFFF;
             right: 0;
         }
+
         .box {
             padding: 80px;
             display: block;
             float: left;
         }
+
         h1 {
             animation-name: fadeIn;
             animation-duration: 1s;
         }
+
         @keyframes move {
             0% {
                 position: absolute;
@@ -52,6 +56,7 @@
         .inputbox:focus {
             outline: 0;
         }
+
         .inputbox {
             padding: 10px;
             font-family: 'Nunito', sans-serif;
@@ -63,11 +68,13 @@
             animation-name: fadeIn;
             animation-duration: 1.5s;
         }
+
         .move {
             animation-name: fadeIn, move;
             animation-duration: 2.5s;
             animation-iteration-count: infinite;
         }
+
         #login {
             padding: 10px;
             border-radius: 50px;
@@ -82,17 +89,21 @@
             background-color: #e91e63;
             position: absolute;
         }
+
         #usernameBox {
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         }
+
         #passwordBox {
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
         }
+
         #login:focus {
             outline: 0;
         }
+
         #success {
             background-color: #00e676;
             float: right;
@@ -103,23 +114,30 @@
 
 <div style="width: 100%;">
 
-<!--{{ if .createSuccess }}-->
+    <!--{{ if .noUser }}-->
     <div class="success">
-        successfully created account!
+        No such user!
     </div>
-<!--{{ end }}-->
+    <!--{{ end }}-->
 
-<div class="box">
-    <form method="POST">
-        <h1>login <i class="material-icons">sync</i></h1>
-        <input type="text" id="usernameBox" name="username" placeholder="username" required class="inputbox">
-        <br/>
-        <input type="password" id="passwordBox" name="password" placeholder="password" required class="inputbox">
-        <br/>
-        <br/>
-        <button id="login"> <i class="move material-icons">arrow_forward</i><i class="material-icons" style="opacity: 0;">|</i></button>
-    </form>
-</div>
+    <!--{{ if .incorrectPassword }}-->
+    <div class="success">
+        Incorrect password!
+    </div>
+    <!--{{ end }}-->
+
+    <div class="box">
+        <form method="POST">
+            <h1>login <i class="material-icons">sync</i></h1>
+            <input type="text" id="usernameBox" name="username" placeholder="username" required class="inputbox">
+            <br/>
+            <input type="password" id="passwordBox" name="password" placeholder="password" required class="inputbox">
+            <br/>
+            <br/>
+            <button id="login"><i class="move material-icons">arrow_forward</i><i class="material-icons"
+                                                                                  style="opacity: 0;">|</i></button>
+        </form>
+    </div>
 </div>
 </body>
 </html>

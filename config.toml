@@ -4,3 +4,4 @@
 	AdminRoute = "/admin/"
 	Secret = "hithisisnice"
 	Domain = "localhost"
+	Debug = true
