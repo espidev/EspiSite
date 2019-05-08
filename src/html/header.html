@@ -10,11 +10,18 @@
         @keyframes header-fadein {
             from {
                 opacity: 0;
-                transform: scale(0.90);
+                transform: scale(0.9);
             }
             to {
                 opacity: 1;
                 transform: scale(1);
+            }
+        }
+
+        @keyframes header-fadeout {
+            to {
+                opacity: 0;
+                transform: scale(0.9);
             }
         }
 
@@ -23,7 +30,7 @@
                 text-shadow: 0 0 0 #FFFFFF;
             }
             50% {
-                text-shadow: 0 0 1px #e91e63;
+                text-shadow: 0 0 2px #e91e63;
             }
             100% {
                 text-shadow: 0 0 0 #FFFFFF;
@@ -44,21 +51,21 @@
             margin-left: 150px;
             position: fixed;
             display: block;
-            animation: 1s header-fadein;
+            transform: scale(0.90);
+            animation: 1s header-fadein forwards;
         }
 
         .header-visible {
-            visibility: visible;
-            animation: 1s header-fadein;
+
         }
 
         .header-hidden {
-            visibility: hidden;
+            animation: 1.5s header-fadeout forwards;
         }
 
         header a {
             text-decoration: none;
-            text-align: center
+            text-align: center;
         }
 
         .header-links {
@@ -71,7 +78,7 @@
         }
 
         .header-links:hover {
-            animation: 0.2s header-expand-hover infinite;
+            animation: 1s header-expand-hover infinite;
         }
 
         .header-hide-button-on {
@@ -88,7 +95,8 @@
         <a href="/about" class="header-links">about</a>
         <a href="/posts" class="header-links">blog</a>
         <a href="/login" class="header-links">login</a>
-        <a href="#" class="header-links header-hide-button-on" id="toggle-header-button" onclick="headerToggleHide()"><i class="material-icons">keyboard_arrow_up</i></a>
+        <a href="#" class="header-links header-hide-button-on" id="toggle-header-button" onclick="headerToggleHide()"><i
+                    class="material-icons">keyboard_arrow_up</i></a>
     </div>
 </header>
 <script>
@@ -107,6 +115,29 @@
         if (hideHeader) {
             document.getElementById("site-header").classList.remove("header-hidden");
             document.getElementById("site-header").classList.add('header-visible');
+
+            let opacity = parseFloat(document.getElementById("site-header").style.opacity);
+            let scale = parseFloat(document.getElementById("site-header").style.transform);
+            let id = setInterval(animateOpen, 5);
+
+            function animateOpen() {
+
+                console.log("d" + document.getElementById("site-header").style.opacity + " " + document.getElementById("site-header").style.transform);
+                console.log(opacity + " " + scale);
+
+                if (scale == 1 && opacity == 1) {
+                    clearInterval(id);
+                    return;
+                }
+                if (opacity != 1) {
+                    document.getElementById("site-header").style.opacity = "" + opacity;
+                    opacity += 0.01;
+                }
+                if (scale != 1) {
+                    document.getElementById("site-header").style.transform = "" + scale;
+                    scale += 0.01;
+                }
+            }
         }
     }
 
