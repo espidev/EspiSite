@@ -9,6 +9,10 @@ import (
 
 func PostRoutes() {
 
+	router.GET("/blog", func(c *gin.Context) {
+		c.Redirect(302, "posts")
+	})
+
 	router.GET("/posts", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "blog.html", db.Posts)
 	})

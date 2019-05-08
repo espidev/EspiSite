@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        @keyframes header-fadein {
+            from {
+                opacity: 0;
+                transform: scale(0.90);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes header-expand-hover {
+            from {
+                text-shadow: 0 0 0 #FFFFFF;
+            }
+            50% {
+                text-shadow: 0 0 1px #e91e63;
+            }
+            100% {
+                text-shadow: 0 0 0 #FFFFFF;
+            }
+        }
+
+        #header-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            letter-spacing: -1px;
+            color: #e91e63;
+            padding-right: 40px;
+        }
+
+        header {
+            overflow: hidden;
+            padding: 20px 10px;
+            margin-left: 150px;
+            position: fixed;
+            display: block;
+            animation: 1s header-fadein;
+        }
+
+        .header-visible {
+            visibility: visible;
+            animation: 1s header-fadein;
+        }
+
+        .header-hidden {
+            visibility: hidden;
+        }
+
+        header a {
+            text-decoration: none;
+            text-align: center
+        }
+
+        .header-links {
+            font-family: 'Nunito', sans-serif;
+            font-size: 28px;
+            letter-spacing: -1px;
+            color: #212121;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .header-links:hover {
+            animation: 0.2s header-expand-hover infinite;
+        }
+
+        .header-hide-button-on {
+            border-radius: 80%;
+            background-color: #e0e0e0;
+        }
+    </style>
+
+</head>
+<body>
+<header onmouseenter="headerMouseEnter()" onmouseleave="headerMouseLeave()">
+    <div id="site-header">
+        <a href="/" id="header-logo"><b>espidev <i class="material-icons">arrow_downward</i></b> </a>
+        <a href="/about" class="header-links">about</a>
+        <a href="/posts" class="header-links">blog</a>
+        <a href="/login" class="header-links">login</a>
+        <a href="#" class="header-links header-hide-button-on" id="toggle-header-button" onclick="headerToggleHide()"><i class="material-icons">keyboard_arrow_up</i></a>
+    </div>
+</header>
+<script>
+    let hideHeader = true;
+
+    function headerToggleHide() {
+        if (hideHeader) {
+            document.getElementById("toggle-header-button").classList.add("header-hide-button-on")
+        } else {
+            document.getElementById("toggle-header-button").classList.remove("header-hide-button-on")
+        }
+        hideHeader = !hideHeader;
+    }
+
+    function headerMouseEnter() {
+        if (hideHeader) {
+            document.getElementById("site-header").classList.remove("header-hidden");
+            document.getElementById("site-header").classList.add('header-visible');
+        }
+    }
+
+    function headerMouseLeave() {
+        if (hideHeader) {
+            document.getElementById("site-header").classList.remove("header-visible");
+            document.getElementById("site-header").classList.add('header-hidden');
+        }
+    }
+</script>
+</body>
+</html>
