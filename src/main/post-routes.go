@@ -27,7 +27,7 @@ func PostRoutes() {
 
 		c.HTML(http.StatusOK, "post.html", gin.H{
 			"postName":    post.Name,
-			"timeUpdated": time.Unix(post.TimeUpdated, 0),
+			"timeUpdated": time.Unix(post.TimeUpdated, 0).Format("01/02/2006 - 3:04PM MST"),
 			"content":     template.HTML(post.Content),
 		})
 

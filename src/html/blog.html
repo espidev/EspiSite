@@ -99,7 +99,9 @@
                     {{ .Name }}
                 </div>
                 <div class="postUpdated">
-                    {{ .TimeUpdated }}
+                    <script>
+                        document.write(new Date({{ .TimeUpdated }}*1000).getMonth()+1 + "/" + new Date({{ .TimeUpdated }}*1000).getDate() + "/" + new Date({{ .TimeUpdated }}*1000).getFullYear());
+                    </script>
                 </div>
                 <br/>
             </a>

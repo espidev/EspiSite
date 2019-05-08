@@ -17,3 +17,5 @@
 bin/
 pkg/
 test/*
+/EspiSite
+espi/
