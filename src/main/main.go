@@ -85,8 +85,10 @@ func setupRoutes() {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
-	router.Static("/css", "/src/css")
-	router.Static("/assets", "/src/assets")
+	router.StaticFile("/html/header.html", "./src/html/header.html")
+	router.Static("/css", "./src/css")
+	router.Static("/js", "./src/js")
+	router.Static("/assets", "./src/assets")
 
 	router.LoadHTMLGlob(RootRepoFolder + "/src/html/*")
 

@@ -5,6 +5,11 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>blog</title>
+
+    <!-- Header -->
+    <style><!-- @import url("/css/header-style.css"); --></style>
+
+
     <style>
         @keyframes fadeIn {
             from {
@@ -27,8 +32,9 @@
             }
         }
 
-        body {
-            padding: 80px;
+        #container {
+            padding-left: 10%;
+            padding-right: 10%;
             display: block;
             float: left;
             font-family: 'Nunito', sans-serif;
@@ -44,7 +50,7 @@
             float: left;
             font-size: 18px;
             padding-left: 18px;
-            font-family: 'Nunito SemiBold', sans-serif;
+            font-family: 'Nunito', sans-serif;
         }
 
         .postUpdated {
@@ -88,6 +94,13 @@
     </style>
 </head>
 <body>
+
+<!-- Header -->
+<div w3-include-html="/html/header.html"></div>
+<script src="/js/include-header.js"></script>
+
+<!-- Content -->
+<div id="container">
 <h1>blog <i class="material-icons">book</i></h1>
 <ul>
 
@@ -110,5 +123,12 @@
     {{end}}
 
 </ul>
+</div>
+
+<script>
+    // pin panel
+    headerToggleHide();
+</script>
+
 </body>
 </html>

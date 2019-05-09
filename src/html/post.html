@@ -5,6 +5,10 @@
     <title>{{ .postName }}</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Header -->
+    <style><!-- @import url("/css/header-style.css"); --></style>
+
     <style>
         @keyframes fadeIn {
             from {
@@ -16,7 +20,8 @@
         }
 
         .content {
-            padding: 10% 10% 5%;
+            padding-left: 10%;
+            padding-right: 10%;
             display: block;
             float: left;
             font-family: 'Lato', sans-serif;
@@ -70,6 +75,13 @@
     </style>
 </head>
 <body>
+
+<!-- Header -->
+<div w3-include-html="/html/header.html"></div>
+<script src="/js/include-header.js"></script>
+
+<!-- Content -->
+
 <div class="content">
     <h1>{{ .postName }} <div class="date"><h4>last updated: {{ .timeUpdated }}</h4></div></h1>
     {{ .content }}
