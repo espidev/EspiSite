@@ -59,14 +59,15 @@ type IPost struct {
 
 type IUser struct {
 	DisplayName string `json:"displayname"`
-	UserName string `json:"username"`
-	Password string `json:"password"`
+	UserName    string `json:"username"`
+	Password    string `json:"password"`
 
 	TimeRegistered int64    `json:"timeregistered"`
 	Posts          []string `json:"posts"`
 
 	Icon        string `json:"icon"`
 	Description string `json:"description"`
+	IsAdmin     bool   `json:"is_admin"`
 }
 
 func (ip *IPost) isID(id PostID) bool {
@@ -103,7 +104,7 @@ func LoadDB() {
 			continue
 		}
 		if postNum <= n {
-			postNum = n+1
+			postNum = n + 1
 		}
 	}
 }

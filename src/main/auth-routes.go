@@ -94,6 +94,34 @@ func AuthRequired() gin.HandlerFunc {
 	}
 }
 
+func IsAdmin() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		userobj, ok := c.Get("user")
+
+		if !ok {
+			c.HTML(401, "no.html", gin.H{})
+			c.Abort()
+			return
+		}
+
+		user, ok := userobj.(IUser)
+
+		if !ok {
+			c.HTML(401, "no.html", gin.H{})
+			c.Abort()
+			return
+		}
+
+		if !user.IsAdmin {
+			c.HTML(401, "no.html", gin.H{})
+			c.Abort()
+			return
+		}
+
+		c.Next()
+	}
+}
+
 func AuthRoutes() {
 	router.GET("/logout", func(c *gin.Context) {
 		c.SetCookie("GOSESSID", "", 0, "/", config.Domain, false, false)
@@ -178,6 +206,7 @@ func AuthRoutes() {
 			Posts:          []string{},
 			Icon:           "",
 			Description:    "",
+			IsAdmin: false,
 		}
 
 		db.Users = append(db.Users, &user)

@@ -95,9 +95,6 @@ func setupRoutes() {
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
-	router.GET("/test", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "home.html", gin.H{})
-	})
 
 	PostRoutes()
 	AuthRoutes()

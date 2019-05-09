@@ -11,6 +11,7 @@ import (
 func AdminRoutes() {
 	admin := router.Group(config.AdminRoute)
 	admin.Use(AuthRequired())
+	admin.Use(IsAdmin())
 
 	admin.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "admin.html", gin.H{})
