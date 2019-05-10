@@ -40,7 +40,6 @@ func GetJWTClaims(token string, secret string) (jwt.MapClaims, error) {
 
 func AuthRequired() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		log.Println(config.Debug)
 		sess, err := c.Cookie("GOSESSID")
 		if err != nil {
 			if config.Debug {
@@ -99,20 +98,29 @@ func IsAdmin() gin.HandlerFunc {
 		userobj, ok := c.Get("user")
 
 		if !ok {
+			if config.Debug {
+				log.Println("[IsAdmin] No user field.")
+			}
 			c.HTML(401, "no.html", gin.H{})
 			c.Abort()
 			return
 		}
 
-		user, ok := userobj.(IUser)
+		user, ok := userobj.(*IUser)
 
 		if !ok {
+			if config.Debug {
+				log.Println("[IsAdmin] Can't assert to IUser.")
+			}
 			c.HTML(401, "no.html", gin.H{})
 			c.Abort()
 			return
 		}
 
 		if !user.IsAdmin {
+			if config.Debug {
+				log.Println("[IsAdmin] Not admin.")
+			}
 			c.HTML(401, "no.html", gin.H{})
 			c.Abort()
 			return

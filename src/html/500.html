@@ -5,6 +5,10 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>500</title>
+
+    <!-- Header -->
+    <style><!-- @import url("/css/header-style.css"); --></style>
+
     <style>
         h1 {
             font-family: 'Montserrat', sans-serif;
@@ -14,7 +18,8 @@
         }
 
         .container {
-            padding: 80px;
+            padding-left: 10%;
+            padding-right: 10%;
             display: block;
         }
 
@@ -63,11 +68,22 @@
         }
     </style>
 </head>
-<body>
+<body onload="headerToggleHide()">
+
+<!-- Header -->
+<div w3-include-html="/html/header.html"></div>
+<script src="/js/include-header.js"></script>
+
 <div class="container">
     <h1>oops.</h1>
     <h2>my internals have crashed and i'm crying very hard</h2>
     <h3><div class="box">500 (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ✧ﾟ･: *ヽ(◕ヮ◕ヽ)</div></h3>
 </div>
+
+<script>
+    // pin panel
+    headerToggleHide();
+</script>
+
 </body>
 </html>

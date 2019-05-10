@@ -92,6 +92,10 @@ func setupRoutes() {
 
 	router.LoadHTMLGlob(RootRepoFolder + "/src/html/*")
 
+	router.NoRoute(func(c *gin.Context) {
+		c.HTML(404, "404.html", gin.H{})
+	})
+
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
