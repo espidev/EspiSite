@@ -17,6 +17,45 @@ func PostRoutes() {
 		c.HTML(http.StatusOK, "blog.html", db.Posts)
 	})
 
+	router.GET("/posts/:year/:month/:day/:num/edit", IsAdmin(), func(c *gin.Context) {
+		id := PostID{IDYear: c.Params.ByName("year"),
+			IDDay:   c.Params.ByName("day"),
+			IDMonth: c.Params.ByName("month"),
+			IDNum:   c.Params.ByName("num")}
+
+		post, err := GetPost(id)
+		if err != nil {
+			c.HTML(http.StatusNotFound, "404.html", gin.H{})
+			return
+		}
+
+		c.HTML(http.StatusOK, "new-post.html", gin.H{
+			"title": post.Name,
+			"content": template.HTML(post.Content),
+		})
+	})
+
+	router.POST("/posts/:year/:month/:day/:num/edit", IsAdmin(), func(c *gin.Context) {
+		id := PostID{IDYear: c.Params.ByName("year"),
+			IDDay:   c.Params.ByName("day"),
+			IDMonth: c.Params.ByName("month"),
+			IDNum:   c.Params.ByName("num")}
+
+		post, err := GetPost(id)
+		if err != nil {
+			c.HTML(http.StatusNotFound, "404.html", gin.H{})
+			return
+		}
+
+		post.TimeUpdated = time.Now().Unix()
+		post.Name = c.PostForm("title")
+		post.Content = c.PostForm("content")
+
+		c.Redirect(302, "/posts/"+id.IDYear+"/"+id.IDMonth+"/"+id.IDDay+"/"+id.IDNum)
+
+		go StoreDB()
+	})
+
 	router.GET("/posts/:year/:month/:day/:num", func(c *gin.Context) {
 		id := PostID{IDYear: c.Params.ByName("year"),
 			IDDay:   c.Params.ByName("day"),
