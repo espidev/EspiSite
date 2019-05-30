@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>login</title>
+
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
+            background-color: #e91e63;
+            color: #FFFFFF;
+            right: 0;
+        }
+
+        .box {
+            padding: 80px;
+            display: block;
+            float: left;
+        }
+
+        h1 {
+            animation-name: fadeIn;
+            animation-duration: 1s;
+        }
+
+        @keyframes move {
+            0% {
+                position: absolute;
+                left: 0;
+                opacity: 0;
+            }
+            50% {
+                position: absolute;
+                left: 50%;
+                opacity: 1;
+            }
+            100% {
+                position: absolute;
+                left: 100%;
+                opacity: 0;
+            }
+        }
+
+        .inputbox:focus {
+            outline: 0;
+        }
+
+        .inputbox {
+            padding: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 20px;
+            border-style: none;
+            border-left-style: solid;
+            border-width: 5px;
+            border-color: #18ffff;
+            animation-name: fadeIn;
+            animation-duration: 1.5s;
+        }
+
+        .move {
+            animation-name: fadeIn, move;
+            animation-duration: 2.5s;
+            animation-iteration-count: infinite;
+        }
+
+        #login {
+            padding: 10px;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 10px;
+            border-style: solid;
+            border-color: #FFFFFF;
+            border-width: 1px;
+            animation: 1.5s fadeIn;
+            color: #FFFFFF;
+            width: 270px;
+            background-color: #e91e63;
+            position: absolute;
+        }
+
+        #usernameBox {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        #passwordBox {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        #login:focus {
+            outline: 0;
+        }
+
+        #success {
+            background-color: #00e676;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+<div style="width: 100%;">
+
+    <!--{{ if .noUser }}-->
+    <div class="success">
+        No such user!
+    </div>
+    <!--{{ end }}-->
+
+    <!--{{ if .incorrectPassword }}-->
+    <div class="success">
+        Incorrect password!
+    </div>
+    <!--{{ end }}-->
+
+    <div class="box">
+        <form method="POST">
+            <h1>login <i class="material-icons">sync</i></h1>
+            <input type="text" id="usernameBox" name="username" placeholder="username" required class="inputbox">
+            <br/>
+            <input type="password" id="passwordBox" name="password" placeholder="password" required class="inputbox">
+            <br/>
+            <br/>
+            <button id="login"><i class="move material-icons">arrow_forward</i><i class="material-icons"
+                                                                                  style="opacity: 0;">|</i></button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

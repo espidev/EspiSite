@@ -34,6 +34,7 @@ var (
 	config Config
 	db     IDatabase
 	postNum int64
+	webfs http.FileSystem
 )
 
 const (
@@ -46,6 +47,8 @@ func main() {
 	// License disclaimer
 	log.Println(`This program comes with ABSOLUTELY NO WARRANTY;
 This is free software, and you are welcome to redistribute it under certain conditions.`)
+
+	// Load web files
 
 	// Load config and data
 	setupConfig()
@@ -85,12 +88,12 @@ func setupRoutes() {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
-	router.StaticFile("/html/header.html", "./src/html/header.html")
-	router.Static("/css", "./src/css")
-	router.Static("/js", "./src/js")
-	router.Static("/assets", "./src/assets")
+	router.StaticFile("/html/header.html", "./assets/html/header.html")
+	router.Static("/css", "./assets/css")
+	router.Static("/js", "./assets/js")
+	router.Static("/images", "./assets/images")
 
-	router.LoadHTMLGlob(RootRepoFolder + "/src/html/*")
+	router.LoadHTMLGlob(RootRepoFolder + "/assets/html/*")
 
 	router.NoRoute(func(c *gin.Context) {
 		c.HTML(404, "404.html", gin.H{})

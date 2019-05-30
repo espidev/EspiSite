@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- hi, no -->
+    <title>espidev</title>
+    <style>
+        @keyframes title {
+            from {
+                transform: rotate3d(25, 15, 50, 10deg) scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: rotate3d(0, 0, 0, 0deg) scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes icons {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 64px;
+            letter-spacing: -1px;
+            color: #e91e63;
+            animation: 1s title;
+        }
+
+        h3 {
+            font-size: 24px;
+            animation: 2s title;
+        }
+
+        .container {
+            padding: 5%;
+            display: block;
+            position: absolute;
+            bottom: 20%;
+            margin-left: 5%;
+        }
+
+        .collapsible {
+            cursor: pointer;
+            outline: none;
+        }
+
+        .active, .collapsible:hover {
+            color: #e91e63;
+        }
+
+        .pinkish:hover {
+            color: #e91e63;
+        }
+
+        .pinkish {
+            color: black;
+            padding-right: 50px;
+        }
+
+        .links {
+            font-size: 24px;
+            padding-top: 5%;
+            animation: 3s icons;
+        }
+        .icon-size {
+            font-size: 36px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>espidev <i class="material-icons">arrow_downward</i></h1>
+    <h3>doing stuff because why not ~ ¯\_(ツ)_/¯</h3>
+
+    <div class="links">
+        <a class="pinkish" href="about"><i class="material-icons icon-size">
+                <script>
+                    let r = ['sentiment_very_dissatisfied', 'sentiment_dissatisfied', 'sentiment_neutral', 'sentiment_satisfied', 'sentiment_very_satisfied'];
+                    document.write(r[parseInt(Math.random() * 5)]);
+                </script>
+            </i></a>
+        <a class="pinkish" href="blog"><i class="material-icons icon-size">library_books</i></a>
+        <a class="pinkish" href="contact"><i class="material-icons icon-size">drafts</i></a>
+    </div>
+
+</div>
+<script>
+    let c = document.getElementsByClassName("collapsible");
+
+    for (let i = 0; i < c.length; i++) {
+        c[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            let content = this.nextElementSibling.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>admin</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes expand {
+            from {
+                box-shadow: 0 1px 10px 0 #FFFFFF;
+            }
+            50% {
+                box-shadow: 0 1px 29px 0 #FFFFFF;
+            }
+            100% {
+                box-shadow: 0 1px 10px 0 #FFFFFF;
+            }
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
+            background-color: #e91e63;
+            color: #FFFFFF;
+            right: 0;
+            padding: 80px;
+            animation-name: fadeIn;
+            animation-duration: 2s;
+        }
+
+        .adminbox {
+            padding: 40px;
+            border-style: solid;
+            border-color: #FFFFFF;
+            border-width: 2px;
+            border-radius: 15px;
+        }
+
+        button {
+            border-style: solid;
+            padding: 10px;
+            border-color: #FFFFFF;
+            border-width: 2px;
+            border-radius: 10px;
+            color: #FFFFFF;
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
+            box-shadow: 0 1px 10px 0 #FFFFFF;
+            height: 50px;
+        }
+
+        button:hover {
+            animation: 1s expand infinite;
+        }
+
+        .gradient1 {
+            background: #e91e63;
+            background: -webkit-linear-gradient(45deg, #18ffff  0%, #f06292 100%);
+            background: linear-gradient(45deg, #18ffff 0%, #f06292 100%);
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+<h1>admin <i class="material-icons">settings</i></h1>
+<div class="adminbox">
+    <button class="gradient1" title="add post"><a href="new-post"><i class="material-icons">note_add</i></a></button>
+</div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ .postName }}</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Header -->
+    <style><!-- @import url("/css/header-style.css"); --></style>
+
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .content {
+            padding-left: 10%;
+            padding-right: 10%;
+            display: block;
+            float: left;
+            font-family: 'Lato', sans-serif;
+            animation: 2s fadeIn;
+            line-height: 2;
+            width: 80%;
+        }
+
+        p {
+            font-size: 24px;
+        }
+
+        h1 {
+            font-size: 40px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 27px;
+            letter-spacing: 0.01em;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        img {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .date {
+            float: right;
+            color: #999999;
+        }
+
+        h4 {
+            font-size: 20px;
+            letter-spacing: 0.01em
+        }
+
+        footer {
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-bottom: 100px;
+            color: #999999;
+            font-size: 20px;
+            letter-spacing: 0.01em;
+            font-family: 'Nunito', sans-serif;
+            animation: 2.5s fadeIn;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div w3-include-html="/html/header.html"></div>
+<script src="/js/include-header.js"></script>
+
+<!-- Content -->
+
+<div class="content">
+    <h1>{{ .postName }} <div class="date"><h4>last updated: {{ .timeUpdated }}</h4></div></h1>
+    {{ .content }}
+</div>
+<footer>
+    espi.dev - licensed under gpl v3, and is free to use and redistribute
+    <div style="float: right"> ✧ﾟ･: *ヽ(◕ヮ◕ヽ)</div>
+</footer>
+</body>
+</html>

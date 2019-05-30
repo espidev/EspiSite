@@ -19,3 +19,6 @@ pkg/
 test/*
 EspiSite
 espi/
+/test
+/generate/main/generate
+
