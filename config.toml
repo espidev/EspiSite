@@ -1,7 +1,0 @@
-
-	SiteName = "espidev"
-	Port = 3000
-	AdminRoute = "/admin/"
-	Secret = "hithisisnice"
-	Domain = "localhost"
-	Debug = true

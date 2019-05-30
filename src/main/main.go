@@ -21,6 +21,9 @@ package main
 import (
 	"context"
 	"github.com/gin-gonic/gin"
+	"github.com/shurcooL/httpfs/vfsutil"
+	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -38,7 +41,7 @@ var (
 )
 
 const (
-	RootRepoFolder = "."
+	RootFolder = "."
 )
 
 func main() {
@@ -49,6 +52,38 @@ func main() {
 This is free software, and you are welcome to redistribute it under certain conditions.`)
 
 	// Load web files
+	os.RemoveAll(RootFolder + "/assets/")
+
+	// write binary files to disk
+	err := vfsutil.WalkFiles(assets, "/", func(path string, fi os.FileInfo, r io.ReadSeeker, err error) error {
+		if err != nil {
+			log.Fatal(err)
+			return nil
+		}
+		println(path)
+		if fi.IsDir() {
+			err = os.Mkdir(RootFolder + "/assets" + path, 0777)
+			if err != nil {
+				log.Fatal(err)
+			}
+		} else {
+			b, err := ioutil.ReadAll(r)
+
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			err = ioutil.WriteFile(RootFolder + "/assets" + path, b, 0777)
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+		return nil
+	})
+
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 
 	// Load config and data
 	setupConfig()
@@ -88,12 +123,12 @@ func setupRoutes() {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
-	router.StaticFile("/html/header.html", "./assets/html/header.html")
-	router.Static("/css", "./assets/css")
-	router.Static("/js", "./assets/js")
-	router.Static("/images", "./assets/images")
+	router.StaticFile("/html/header.html", RootFolder+ "/assets/html/header.html")
+	router.Static("/css", RootFolder+ "/assets/css")
+	router.Static("/js", RootFolder+ "/assets/js")
+	router.Static("/images", RootFolder+ "/assets/images")
 
-	router.LoadHTMLGlob(RootRepoFolder + "/assets/html/*")
+	router.LoadHTMLGlob(RootFolder + "/assets/html/*")
 
 	router.NoRoute(func(c *gin.Context) {
 		c.HTML(404, "404.html", gin.H{})
@@ -101,6 +136,14 @@ func setupRoutes() {
 
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
+	})
+
+	router.GET("/about", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "about.html", gin.H{})
+	})
+
+	router.GET("/contact", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "contact.html", gin.H{})
 	})
 
 	PostRoutes()

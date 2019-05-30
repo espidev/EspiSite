@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>espidev - about</title>
+
+    <!-- Header -->
+    <style><!-- @import url("/css/header-style.css"); --></style>
+
+    <style>
+        .container {
+            padding-left: 10%;
+            padding-right: 10%;
+            display: block;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
+        }
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            letter-spacing: -1px;
+            color: #e91e63;
+        }
+
+    </style>
+</head>
+<body onload="headerToggleHide()">
+
+<!-- Header -->
+<div w3-include-html="/html/header.html"></div>
+
+<div class="container">
+    <div id="music"></div>
+    <div id="code"></div>
+    <div id="minecraft"></div>
+</div>
+
+<script src="/js/include-header.js"></script>
+<script>headerToggleHide()</script>
+</body>
+</html>

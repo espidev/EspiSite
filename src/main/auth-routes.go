@@ -223,7 +223,7 @@ func AuthRoutes() {
 
 		c.HTML(http.StatusOK, "register.html", gin.H{
 			"createSuccess": true,
-			"loginLink": config.Domain+"/login",
+			"loginLink": "/login",
 		})
 	})
 }
