@@ -153,6 +153,10 @@ func setupRoutes() {
 		})
 	})
 
+	router.GET("/old", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "indexold.html", gin.H{})
+	})
+
 	PostRoutes()
 	AuthRoutes()
 	AdminRoutes()
