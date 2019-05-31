@@ -10,10 +10,22 @@
     <style><!-- @import url("/css/header-style.css"); --></style>
 
     <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(1.01);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         .container {
             padding-left: 10%;
             padding-right: 10%;
             display: block;
+            animation: fadeIn 2s;
         }
 
         body {
@@ -21,10 +33,34 @@
             font-size: 16px;
         }
         h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 48px;
-            letter-spacing: -1px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 36px;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        h2 {
+            font-size: 27px;
+            letter-spacing: 0.01em;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .pinkish:hover {
+            color: #c2185b;
+        }
+        .pinkish {
             color: #e91e63;
+            text-decoration:none;
+        }
+
+        ul {
+            list-style-type: none;
+            font-size: 18px;
+            line-height: 40px;
+            padding-left: 0;
         }
 
     </style>
@@ -35,7 +71,57 @@
 <div w3-include-html="/html/header.html"></div>
 
 <div class="container">
-    <h1>contact me!</h1>
+    <h1>contact meee</h1>
+    <p>
+        There are a variety of ways to contact me.
+        <br/>
+        I check email the most often, but you can also find me on social media! <i class="material-icons icon-size" style="font-size:18px">sentiment_very_satisfied</i>
+    </p>
+    <p>
+        <ul>
+        <li><a href="mailto:espidev@gmail.com" class="pinkish">email <i class="material-icons icon-size" style="font-size:18px">email</i> - espidev@gmail.com</a></li>
+        <li><a href="https://twitter.com/espidev" class="pinkish">twitter <img src="/images/Twitter_Logo_Blue.png" width=18px height=18px/> - https://twitter.com/espidev</a></li>
+        <li><a class="pinkish">discord <img src="/images/Discord-Logo-Black.png" width="18px" height="18px" /> - EspiDev#2837</a></li>
+        </ul>
+    </p>
+    <p>
+    <h2>code</h2>
+        <ul>
+        <li><a href="https://gitlab.com/espidev" class="pinkish">gitlab <img src="https://gitlab.com/gitlab-com/gitlab-artwork/raw/master/logo/logo.png" width=15px height=15px/> - https://gitlab.com/espidev</a></li>
+        <li><a href="https://github.com/espidev" class="pinkish">github <img src="/images/GitHub-Mark-32px.png" width=18px height=18px/> - https://github.com/espidev</a></li>
+        </ul>
+    </p>
+    <p>
+        <h2>musik</h2>
+        <ul>
+            <li>
+                <a href="https://soundcloud.com/espidev" class="pinkish">soundcloud <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Antu_soundcloud.svg/1200px-Antu_soundcloud.svg.png" height=17px width=17px/> - https://soundcloud.com/espidev</a>
+            </li>
+            <li>
+                <a href="https://youtube.com/c/EspiDev" class="pinkish" id="yt">youtube <img src="/images/youtube_colour.png" height=14px/> - https://youtube.com/c/EspiDev</a>
+            </li>
+            <li>
+                <a href="https://espidev.bandcamp.com" class="pinkish">bandcamp <img src="/images/bandcamp.png" height=16px/> - https://espidev.bandcamp.com</a>
+            </li>
+            <li>
+                <a href="https://espidev.newgrounds.com" class="pinkish" >newgrounds <img src="/images/newgrounds.png" height=16px/> - https://espidev.newgrounds.com</a>
+            </li>
+            <li>
+                <a href="https://clyp.it/user/chq3ksgw" class="pinkish">clyp (wip) <img src="/images/clyp.jpg" style="top:10%" height=16px/> - https://clyp.it/user/chq3ksgw</a>
+            </li>
+        </ul>
+    <ul>
+        <li></li>
+    </ul>
+    </p>
+    <p>
+        <h2>minecraft</h2>
+    <ul>
+        <li>
+            <a href="https://www.spigotmc.org/members/espidev.603037/" class="pinkish">spigotmc - https://www.spigotmc.org/members/espidev.603037/</a>
+        </li>
+    </ul>
+    </p>
 </div>
 
 <script src="/js/include-header.js"></script>

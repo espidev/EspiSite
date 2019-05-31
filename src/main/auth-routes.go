@@ -101,7 +101,9 @@ func IsAdmin() gin.HandlerFunc {
 			if config.Debug {
 				log.Println("[IsAdmin] No user field.")
 			}
-			c.HTML(401, "no.html", gin.H{})
+			c.HTML(401, "no.html", gin.H{
+				"DisplayNotAuthorized": false,
+			})
 			c.Abort()
 			return
 		}

@@ -52,7 +52,8 @@ func main() {
 This is free software, and you are welcome to redistribute it under certain conditions.`)
 
 	// Load web files
-	os.RemoveAll(RootFolder + "/assets/")
+
+	_ = os.RemoveAll(RootFolder + "/assets/")
 
 	// write binary files to disk
 	err := vfsutil.WalkFiles(assets, "/", func(path string, fi os.FileInfo, r io.ReadSeeker, err error) error {
@@ -144,6 +145,12 @@ func setupRoutes() {
 
 	router.GET("/contact", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "contact.html", gin.H{})
+	})
+
+	router.GET("/no", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "no.html", gin.H{
+			"DisplayNotAuthorized": false,
+		})
 	})
 
 	PostRoutes()
