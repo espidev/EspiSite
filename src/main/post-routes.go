@@ -17,7 +17,7 @@ func PostRoutes() {
 		c.HTML(http.StatusOK, "blog.html", db.Posts)
 	})
 
-	router.GET("/posts/:year/:month/:day/:num/edit", IsAdmin(), func(c *gin.Context) {
+	router.GET("/posts/:year/:month/:day/:num/edit", AuthRequired(), IsAdmin(), func(c *gin.Context) {
 		id := PostID{IDYear: c.Params.ByName("year"),
 			IDDay:   c.Params.ByName("day"),
 			IDMonth: c.Params.ByName("month"),
@@ -35,7 +35,7 @@ func PostRoutes() {
 		})
 	})
 
-	router.POST("/posts/:year/:month/:day/:num/edit", IsAdmin(), func(c *gin.Context) {
+	router.POST("/posts/:year/:month/:day/:num/edit", AuthRequired(), IsAdmin(), func(c *gin.Context) {
 		id := PostID{IDYear: c.Params.ByName("year"),
 			IDDay:   c.Params.ByName("day"),
 			IDMonth: c.Params.ByName("month"),
