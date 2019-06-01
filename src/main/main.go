@@ -128,6 +128,7 @@ func setupRoutes() {
 	router.Static("/css", RootFolder+ "/assets/css")
 	router.Static("/js", RootFolder+ "/assets/js")
 	router.Static("/images", RootFolder+ "/assets/images")
+	router.StaticFile("/favicon.ico", RootFolder + "/assets/images/favicon.ico")
 
 	router.LoadHTMLGlob(RootFolder + "/assets/html/*")
 
