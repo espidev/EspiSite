@@ -55,6 +55,8 @@ type IPost struct {
 
 	Icon    string `json:"icon"`
 	Content string `json:"content"`
+
+	Visibility bool `json:"visibility"`
 }
 
 type IUser struct {
