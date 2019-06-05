@@ -3,26 +3,13 @@ let hideHeader = true;
 function headerToggleHide() {
     if (hideHeader) {
         document.getElementById("toggle-header-button").innerHTML = "<i class=\"material-icons\">lens</i>";
-        headerMouseEnter();
+        document.getElementById("website-header").classList.remove("header-autohide");
         hideHeader = false;
     } else {
         document.getElementById("toggle-header-button").innerHTML = "<i class=\"material-icons\">panorama_fish_eye</i>";
+        document.getElementById("website-header").classList.add("header-autohide");
         hideHeader = true;
         // messy headerMouseLeave();
-    }
-}
-
-function headerMouseEnter() {
-    if (hideHeader) {
-        document.getElementById("site-header").classList.remove("header-hidden");
-        document.getElementById("site-header").classList.add('header-visible');
-    }
-}
-
-function headerMouseLeave() {
-    if (hideHeader) {
-        document.getElementById("site-header").classList.remove("header-visible");
-        document.getElementById("site-header").classList.add('header-hidden');
     }
 }
 
