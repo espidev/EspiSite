@@ -1,6 +1,14 @@
-let hideHeader = true;
+let hideHeader = true, keepHeaderShowingStart = true;
+
+function headerHoverToggle() {
+    if (keepHeaderShowingStart) {
+        document.getElementById("website-header").classList.add("header-autohide");
+        keepHeaderShowingStart = false;
+    }
+}
 
 function headerToggleHide() {
+    keepHeaderShowingStart = false;
     if (hideHeader) {
         document.getElementById("toggle-header-button").innerHTML = "<i class=\"material-icons\">lens</i>";
         document.getElementById("website-header").classList.remove("header-autohide");

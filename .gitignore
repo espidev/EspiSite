@@ -21,4 +21,4 @@ EspiSite
 espi/
 /test
 /generate/main/generate
-
+src/main/assets_vfsdata.go
