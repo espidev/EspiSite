@@ -12,14 +12,36 @@
     <style>
         .container {
             padding-left: 10%;
-            padding-right: 10%;
+            padding-right: 50%;
             display: block;
+            float: left;
+            /*font-family: 'Lato', sans-serif;*/
+            animation: 2s fadeIn;
+            line-height: 2;
+            width: 50%;
         }
 
         body {
             font-family: 'Nunito', sans-serif;
             font-size: 16px;
         }
+
+        p {
+            font-size: 24px;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 27px;
+            letter-spacing: 0.01em;
+            font-family: 'Nunito', sans-serif;
+        }
+
         h1 {
             font-family: 'Montserrat', sans-serif;
             font-size: 48px;
@@ -35,10 +57,22 @@
 <div w3-include-html="/html/header.html"></div>
 
 <div class="container">
-    hi! i suck?
-    <div id="music"></div>
-    <div id="code"></div>
-    <div id="minecraft"></div>
+    <h1>about me !?</h1>
+    <p>
+        Hello...
+        <br/>
+        I am a high school student that loves to work on projects that interest me!
+        I started my internet adventures in elementary school, but now I have ended up finding not enough time to work on the millions of things I do want to work on... :(
+    </p>
+    <div id="music">
+        <h2>music</h2>
+    </div>
+    <div id="code">
+        <h2>code</h2>
+    </div>
+    <div id="minecraft">
+        <h2>minecraft</h2>
+    </div>
 </div>
 
 <script src="/js/include-header.js"></script>
