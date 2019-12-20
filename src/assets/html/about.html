@@ -10,6 +10,17 @@
     <style><!-- @import url("/css/header-style.css"); --></style>
 
     <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .container {
             padding-left: 10%;
             padding-right: 50%;
@@ -76,6 +87,6 @@
 </div>
 
 <script src="/js/include-header.js"></script>
-<script>headerToggleHide()</script>
+<script>window.onload = () => headerToggleHide()</script>
 </body>
 </html>
